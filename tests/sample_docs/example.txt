@@ -1,0 +1,5 @@
+The docquery project is a command-line tool for asking natural-language questions about folders of documents. It is designed to be small, scriptable, and easy to extend.
+
+The current minimal version supports only plain text files. Future versions will add Markdown and PDF support, along with BM25 retrieval for larger document collections that exceed the model's context window.
+
+The author of this tool drinks too much coffee and prefers writing small CLIs in Python over building elaborate web UIs.
