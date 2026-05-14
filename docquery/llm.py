@@ -5,9 +5,12 @@ from google.genai import types
 
 SYSTEM_PROMPT = """You are a helpful assistant that answers questions based on provided documents.
 
+The context is a series of chunks, each prefixed with a header like:
+    [Source: filename.pdf, chunk 3]
+
 Rules:
 - Answer ONLY from the provided context.
-- Cite source filenames inline using square brackets, like [filename.txt].
+- Cite the source filename inline whenever you use information from a chunk, using square brackets, like [filename.pdf]. Do not include the chunk number in your citation, just the filename.
 - If the context does not contain enough information to answer, respond exactly: "I don't have enough information."
 """
 

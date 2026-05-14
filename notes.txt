@@ -1,0 +1,25 @@
+Known limitations
+=================
+
+BM25 retrieval is purely lexical / keyword-based. It scores chunks by
+overlap with the *exact* words in the query (after lowercasing,
+non-alphanumeric splitting, and stopword removal), so it cannot bridge
+semantic synonyms:
+
+  - a query about "vacation policy" will NOT retrieve a chunk that
+    uses "PTO"
+  - a query about "cars" will NOT retrieve a chunk that uses
+    "vehicles" or "automobiles"
+  - a query about "ML" will NOT retrieve a chunk that uses
+    "machine learning"
+
+This shows up most when the user phrases a question in vocabulary that
+differs from the source documents (which is common in practice).
+
+User-side workaround: rephrase the question with terms likely to
+appear in the source documents.
+
+Possible future fix: swap BM25Retriever for a dense-vector retriever
+backed by an embedding model (e.g. gemini-embedding-001), or combine
+the two (hybrid retrieval). Embeddings handle synonym matching;
+BM25 still wins on exact-keyword and rare-term recall.
